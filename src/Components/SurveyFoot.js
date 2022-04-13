@@ -5,6 +5,15 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
 function SurveyFoot() {
+  function clickToFB(){
+    window.open('https://www.facebook.com/profile.php?id=100010730803036')
+  }
+  function clickToTW(){
+    window.open('https://twitter.com/hoangpham119')
+  }
+  function clickToIG(){
+    window.open('https://www.instagram.com/hoagpham.mew/')
+  }
   return (
     <>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" style={{background:'#F6F7FB'}}>
@@ -12,13 +21,13 @@ function SurveyFoot() {
       </svg>
       <Box sx={{background:'#1976D2',width:'100%', height:'140px', display:'flex', flexDirection:'column',justifyItems:'center', alignItems:'center', marginTop:'-100px'}}>
         <Box>
-        <IconButton sx={{color:'white'}}>
+        <IconButton sx={{color:'white'}} onClick={clickToFB}>
             <FacebookIcon fontSize='large'/>
         </IconButton>
-        <IconButton sx={{color:'white'}}>
+        <IconButton sx={{color:'white'}} onClick={clickToTW}>
             <TwitterIcon fontSize='large'/>
         </IconButton>
-        <IconButton sx={{color:'white'}}>
+        <IconButton sx={{color:'white'}} onClick={clickToIG}>
             <InstagramIcon fontSize='large'/>
         </IconButton>
           </Box>

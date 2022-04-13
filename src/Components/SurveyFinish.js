@@ -63,10 +63,26 @@ function ButtonAnswer(props){
 
 function SurveyFinish(props) {
   const [loadingToFinish, setLoadingToFinish] = useState(false)
+  const [score,setScore] = useState(0)
 
   function loading(){
     setLoadingToFinish(true)
-    setTimeout(() => {  setLoadingToFinish(false); }, 2000);
+    setTimeout(() => {  caculatorScore(); }, 3000);
+  }
+
+  function caculatorScore(){
+    let s = 0
+    props.dbQuestion.forEach(element => {
+      if(element.result){
+        s++
+      }
+    });
+    setScore(s*10)
+    setLoadingToFinish(false)
+  }
+
+  function reload(){
+    window.location.reload()
   }
 
   useEffect(() => {
@@ -87,7 +103,14 @@ function SurveyFinish(props) {
         loadingToFinish?
         <LoadingPage/>:
         <>
-          {props.dbQuestion.map((item,i) => (<AnwserFinishh db={item} i={i}/>))}
+          <Box sx={{fontSize:50, marginTop:5, display:'flex', color:'#737684'}}>
+            {"Your score is:"}
+            <Box sx={{color:'#2DA1FF'}}>
+            {score}/{props.dbQuestion.length*10}
+            </Box>
+          </Box>
+          {props.dbQuestion.map((item,i) => (<AnwserFinishh db={item} i={i} increaseScore={props.increaseScore}/>))}
+          <Button variant='contained' sx={{marginTop:3}} onClick={reload}>re-survey</Button>
         </>
       }
     </Box>
@@ -96,7 +119,7 @@ function SurveyFinish(props) {
 
 
 function AnwserFinishh(props) {
-
+  
   return (
     <Box sx={{
         width:'80%',

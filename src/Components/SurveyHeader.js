@@ -1,8 +1,28 @@
 import { AppBar, Box, Button, Container, LinearProgress, Toolbar } from '@mui/material'
 import React from 'react'
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import { useNavigate } from 'react-router-dom';
+import LocalStorage from '../LocalStorage/LocalStorage';
+import axios from 'axios';
 
 function SurveyHeader(props) {
+  let navigate = useNavigate()
+  function logOut(){
+    LocalStorage.RemoveDataAuth()
+    navigate('/')
+  }
+
+  async function clickLogOut(){
+    await axios.post('https://fwa-ec-quiz.herokuapp.com/v1/auth/logout',{
+      refreshToken:`${localStorage.getItem('tokenRefresh')}`
+    }).then(
+      function (response) {
+        console.log(response)
+        logOut()
+      }
+    )
+  }
+
   return (
     <AppBar position='static' color='default'>
       <Container maxWidth="xl">
@@ -19,7 +39,7 @@ function SurveyHeader(props) {
               Question Survey
             </Box>
           </Box>
-          <Button variant="contained">
+          <Button variant="contained" onClick={clickLogOut}>
             Log Out
           </Button>
         </Toolbar>
