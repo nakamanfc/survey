@@ -90,7 +90,11 @@ function LoginPage() {
       .then(function (response) {
         storeDataAuth.storeDataAuth(response.data);
         console.log(response.data);
-        navigate('/survey');
+        if(response.data.user.role == 'user'){
+          navigate('/survey');
+        } else {
+          navigate('/admin');
+        }
         setLoginLoading(false)
       })
       .catch(function (error) {
@@ -136,10 +140,10 @@ function LoginPage() {
         <Container sx={ContainerLoginCss}>
         {loginStatus?(
           <>
-            <div>
+            <Box>
               <Button variant="contained">Log in</Button>
               <Button variant="text" onClick={changeLoginStatus} >Register</Button>
-            </div>
+            </Box>
             <Input type="text" placeholder="User Name" name="userName" value={dataLogin.values.userName} onChange={dataLogin.handleChange} icon={<AccountCircleIcon color='primary'/>}/>
             <Input type="password" placeholder="Password" name="password" value={dataLogin.values.password} onChange={dataLogin.handleChange} icon={<VpnKeyIcon color='primary'/>}/>
             <RememberMe/>
@@ -148,10 +152,10 @@ function LoginPage() {
           </>
         ):(
           <>
-            <div>
+            <Box>
               <Button variant="text" onClick={changeLoginStatus} color='primary'>Log in</Button>
               <Button variant="contained" color='primary'>Register</Button>
-            </div>
+            </Box>
             <Input type="text" placeholder="User Name" name="userName" value={dataRegister.values.userName} onChange={dataRegister.handleChange} icon={<AccountCircleIcon color='primary'/>}/>
             <Input type="text" placeholder="Email" name="email" value={dataRegister.values.email} onChange={dataRegister.handleChange} icon={<EmailIcon color='primary'/>}/>
             <Input type="password" placeholder="Password" name="password" value={dataRegister.values.password} onChange={dataRegister.handleChange} icon={<KeyIcon color='primary'/>}/>

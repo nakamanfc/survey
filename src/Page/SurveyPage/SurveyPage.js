@@ -11,7 +11,7 @@ function SurveyPage() {
   const [numQuestion,setNumQuestion] = useState(1);
   const [sizeQuestion, setSizeQuestion] = useState(10);
   const [question, setQuestion] = useState([]);
-  const [loadingPage, setLoadingPage] = useState(false);
+  const [loadingPage, setLoadingPage] = useState(true);
   const [isFinishSurvey,setIsFinishSurvey] = useState(false);
 
   function checkActiveTime(){
@@ -139,7 +139,7 @@ function SurveyPage() {
       <LoadingPage/>
       :
       <>
-        <SurveyHeader numQuestion={numQuestion} sizeQuestion={sizeQuestion}/>
+        <SurveyHeader numQuestion={numQuestion} sizeQuestion={sizeQuestion} dbQuestion={dbQuestion}/>
         <SurveyBody
           dbQuestion={dbQuestion} sizeQuestion={sizeQuestion}
           question={question} numQuestion={numQuestion}

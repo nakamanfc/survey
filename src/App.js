@@ -3,13 +3,22 @@ import LoginPage from './Page/LoginPage/LoginPage';
 import SurveyPage from './Page/SurveyPage/SurveyPage';
 import React, { useState, useEffect } from 'react'
 import AdminPage from './Page/AdminPage/AdminPage';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
-
+  let navigate = useNavigate()
+  useEffect(() => {
+    if(localStorage.getItem('role') == 'user'){
+      navigate('/survey')
+    } else if(localStorage.getItem('role') == 'admin'){
+      navigate('/admin')
+    }
   
-
-
-  // console.log(new Date('2022-04-06T10:28:53.373Z') -  new Date());
+    return () => {
+      
+    }
+  }, [])
+  
   return (
     <>
     <Routes>
