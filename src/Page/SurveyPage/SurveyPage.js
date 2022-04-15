@@ -95,6 +95,11 @@ function SurveyPage() {
       console.log(err)
     })
   }
+  
+  function loopQuestion(){
+    getQuestion()
+  }
+
   async function getQuestion(){
     console.log('getQuestion')
     await axios.get('https://fwa-ec-quiz.herokuapp.com/v1/questions/',{
@@ -109,6 +114,7 @@ function SurveyPage() {
       setLoadingPage(false)
     })
     .catch((err) => {
+      loopQuestion()
       console.log(err)
     })
   }
@@ -116,12 +122,7 @@ function SurveyPage() {
   function getData(){
     setLoadingPage(true)
     checkActiveTime()
-    if(new Date(localStorage.getItem('expiresAccess')) - new Date() <= 0){
-      setTimeout(() => {  getQuestion() }, 3000);
-    } else {
-      getQuestion()
-    }
-
+    getQuestion()
   }
 
   useEffect(() => {
